@@ -15,8 +15,8 @@ jobs:
     - name: Build the docker_compose
       run: docker-compose up -d --build
       
-    - name: Buid the application
-      run: docker-compose exec -T counter_app npm run build
+    # - name: Buid the application
+    #   run: docker-compose exec -T counter_app npm run build
 
   Deploy:
     needs: build
