@@ -1,8 +1,9 @@
 services:
   api-service:
+    container_name: pipeline
     build:
       context: .
-      dockerfile: ./apps/api-service/Dockerfile
+      dockerfile: ./Dockerfile
       target: development
     command: npm run start:dev api-service
     env_file:
