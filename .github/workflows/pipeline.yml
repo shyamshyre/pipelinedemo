@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+        with:
+            path: main
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
