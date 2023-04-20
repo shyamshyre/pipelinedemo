@@ -42,9 +42,7 @@ jobs:
       - name: List home directory
         run: ssh ec2 'ls -la'
       - name: Pull Git Repository
-        run: ssh ec2 'cd /home/ubuntu/pipelinedemo'
-      - name: List the files in the directory
-        run: ssh ec2 'ls -la'
+        run: ssh ec2 'cd /home/ubuntu/pipelinedemo && ls -la'
       - name: Change Branch to Master
         run: ssh ec2 'git checkout master'
       - name: Fetch Git Entire Repository
