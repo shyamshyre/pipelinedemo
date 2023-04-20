@@ -46,13 +46,13 @@ jobs:
       - name: Pull Git Repository
         run: ssh ec2 'cd /home/ubuntu/pipelinedemo && ls -la'
       - name: Change Branch to Master
-        run: ssh ec2 'git checkout main'
+        run: ssh ec2 'sudo git checkout main'
       - name: Fetch Git Entire Repository
-        run: ssh ec2 'git fetch --all'  
+        run: ssh ec2 'sudo git fetch --all'  
       - name: Reset Origin to Master
-        run: ssh ec2 'git reset --hard origin/master'  
+        run: ssh ec2 'sudo git reset --hard origin/master'  
       - name: Pulling from the master 
-        run: git pull origin master
+        run: ssh ec2 'sudo git pull origin main'
          
         #   git checkout master &&
         #   git fetch --all &&
