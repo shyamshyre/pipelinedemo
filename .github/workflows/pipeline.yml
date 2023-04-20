@@ -2,9 +2,9 @@ name: ssh-into-aws-git-ec2
 
 on:
   push:
-    branches: [ main,workflow_dispatch]
+    branches: [ master,workflow_dispatch]
   pull_request:
-    branches: [ main,workflow_dispatch]
+    branches: [ master,workflow_dispatch]
 
 env:
 #  bucket_name: "<example-bucket-name>"
