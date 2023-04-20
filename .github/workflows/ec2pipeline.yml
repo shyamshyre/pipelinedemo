@@ -1,0 +1,30 @@
+name: Push-to-EC2
+
+# Trigger deployment only on push to master branch
+on:
+  push:
+    branches: [main, workflow_dispatch]
+env:
+#  bucket_name: "<example-bucket-name>"
+    AWS_REGION: ap-south-1
+    REMOTE_HOST: 13.126.152.69
+    REMOTE_USER: ec2-user
+    TARGET_DIR: /home/ubuntu/pipelinedemo
+        
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v3
+
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ env.REMOTE_HOST }}
+          REMOTE_USER: ${{ env.REMOTE_USER }}
+          TARGET: ${{ env.TARGET_DIR }}
