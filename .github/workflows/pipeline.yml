@@ -43,12 +43,20 @@ jobs:
         run: ssh ec2 'ls -la'
       - name: Pull Git Repository
         run: ssh ec2 'cd /home/ubuntu/pipelinedemo'
-      - name: Pull Git Repository
-        run: ssh ec2 'cd /home/ubuntu/pipelinedemo'
+      - name: List the files in the directory
+        run: ssh ec2 'ls -la'
+      - name: Change Branch to Master
+        run: ssh ec2 'git checkout master'
+      - name: Fetch Git Entire Repository
+        run: ssh ec2 'git fetch --all'  
+      - name: Reset Origin to Master
+        run: ssh ec2 'git reset --hard origin/master'  
+      - name: Pulling from the master 
+        run: git pull origin master
          
         #   git checkout master &&
         #   git fetch --all &&
         #   git reset --hard origin/master &&
-        #   git pull origin master &&
+        #    &&
         #   docker-compose -f docker-compose.yml up -d --build
         
