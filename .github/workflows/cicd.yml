@@ -2,7 +2,7 @@ name: CI/CD pipeline
 
 on:
   push:
-    branches: [ main, workflow_dispatch ]
+    branches: [ developer ]
 
 jobs:
 #First we will see the application build or not , then we will deploy in EC2
@@ -10,7 +10,7 @@ jobs:
 #     runs-on: ubuntu-latest
     
 #     steps:
-#     - uses: actions/checkout@v2
+#     - uses: actions/checkout@v3
     
 #     - name: Build the docker_compose
 #       run: docker-compose up -d --build
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v3 
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
