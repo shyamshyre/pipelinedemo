@@ -50,10 +50,12 @@ jobs:
       - name: Fetch Git Entire Repository
         run: ssh ec2 'sudo git fetch --all'  
       - name: Reset Origin to Master
-        run: ssh ec2 'sudo git reset --hard origin/master'  
+        run: ssh ec2 'sudo git reset --hard origin/main'  
       - name: Pulling from the master 
         run: ssh ec2 'sudo git pull origin main'
-         
+      - name: Pulling from the master 
+        run: ssh ec2 'sudo docker-compose -f docker-compose.yml up -d --build'   
+
         #   git checkout master &&
         #   git fetch --all &&
         #   git reset --hard origin/master &&
