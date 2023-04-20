@@ -9,7 +9,7 @@ env:
     AWS_REGION: ap-south-1
     REMOTE_HOST: 13.126.152.69
     REMOTE_USER: ec2-user
-    TARGET_DIR: /home/ubuntu/pipelinedemo
+    TARGET_DIR: /home/ubuntu/cicddemo
         
 
 jobs:
