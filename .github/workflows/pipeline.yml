@@ -1,4 +1,4 @@
-name: ssh-into-aws-ec2
+name: ssh-into-aws-ec2 
 
 on:
   push:
