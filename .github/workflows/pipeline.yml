@@ -44,11 +44,11 @@ jobs:
       - name: List home directory
         run: ssh ec2 'ls -la'
       - name: Pull Git Repository
-        run: ssh ec2 'cd /home/ubuntu/pipelinedemo && ls -la'
+        run: cd /home/ubuntu/pipelinedemo && ls -la
       - name: Change Branch to main
-        run: 'sudo git init'
+        run: sudo git init
       - name: Change Branch to main
-        run: ssh ec2 'sudo git checkout main'
+        run: sudo git checkout main
       - name: Fetch Git Entire Repository
         run: ssh ec2 'sudo git fetch --all'  
       - name: Reset Origin to main
