@@ -4,14 +4,6 @@ name: Push-to-EC2
 on:
   push:
     branches: [main, workflow_dispatch]
-env:
-#  bucket_name: "<example-bucket-name>"
-    AWS_REGION: ap-south-1
-    REMOTE_HOST: 13.126.152.69
-    REMOTE_USER: ec2-user
-    TARGET_DIR: /home/ubuntu/cicddemo
-        
-
 jobs:
   deploy:
     name: Deploy to EC2 on master branch push

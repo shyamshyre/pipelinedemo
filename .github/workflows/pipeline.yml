@@ -1,64 +1,64 @@
-name: ssh-into-aws-git-ec2  
+# name: ssh-into-aws-git-ec2  
 
-on:
-  push:
-    branches: [ master,workflow_dispatch]
-  pull_request:
-    branches: [ master,workflow_dispatch]
+# on:
+#   push:
+#     branches: [ master,workflow_dispatch]
+#   pull_request:
+#     branches: [ master,workflow_dispatch]
 
-env:
-#  bucket_name: "<example-bucket-name>"
-  AWS_REGION: ap-south-1
-  REMOTE_HOST: 13.126.152.69
-  REMOTE_USER: ec2-user
+# env:
+# #  bucket_name: "<example-bucket-name>"
+#   AWS_REGION: ap-south-1
+#   REMOTE_HOST: 13.126.152.69
+#   REMOTE_USER: ec2-user
 
-permissions:
-  contents: read
-  id-token: write
+# permissions:
+#   contents: read
+#   id-token: write
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-        with:
-            path: main
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/github-actions-key
-          chmod 600 ~/.ssh/github-actions-key
-          cat >>~/.ssh/config <<END
-          Host ec2
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/github-actions-key
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_HOST: ${{ env.REMOTE_HOST }}
-          SSH_USER: ${{ env.REMOTE_USER }}
-          SSH_KEY: ${{ secrets.AWS_PRIVATE_KEY }} 
-      - name: List home directory
-        run: ssh ec2 'ls -la'
-      - name: Pull Git Repository
-        run: ssh ec2 'cd /home/ubuntu/pipelinedemo && ls -la'
-      - name: Change Branch to main
-        run: ssh ec2 'sudo git checkout main'
-      - name: Fetch Git Entire Repository
-        run: ssh ec2 'sudo git fetch --all'  
-      - name: Reset Origin to main
-        run: ssh ec2 'sudo git reset --hard origin/main'  
-      - name: Pulling from the main 
-        run: ssh ec2 'sudo git pull origin main'
-      - name: Pulling from the main 
-        run: ssh ec2 'sudo docker-compose -f docker-compose.yml up -d --build'   
+#     steps:
+#       - name: Git clone the repository
+#         uses: actions/checkout@v3
+#         with:
+#             path: main
+#       - name: Configure SSH
+#         run: |
+#           mkdir -p ~/.ssh/
+#           echo "$SSH_KEY" > ~/.ssh/github-actions-key
+#           chmod 600 ~/.ssh/github-actions-key
+#           cat >>~/.ssh/config <<END
+#           Host ec2
+#             HostName $SSH_HOST
+#             User $SSH_USER
+#             IdentityFile ~/.ssh/github-actions-key
+#             StrictHostKeyChecking no
+#           END
+#         env:
+#           SSH_HOST: ${{ env.REMOTE_HOST }}
+#           SSH_USER: ${{ env.REMOTE_USER }}
+#           SSH_KEY: ${{ secrets.AWS_PRIVATE_KEY }} 
+#       - name: List home directory
+#         run: ssh ec2 'ls -la'
+#       - name: Pull Git Repository
+#         run: ssh ec2 'cd /home/ubuntu/pipelinedemo && ls -la'
+#       - name: Change Branch to main
+#         run: ssh ec2 'sudo git checkout main'
+#       - name: Fetch Git Entire Repository
+#         run: ssh ec2 'sudo git fetch --all'  
+#       - name: Reset Origin to main
+#         run: ssh ec2 'sudo git reset --hard origin/main'  
+#       - name: Pulling from the main 
+#         run: ssh ec2 'sudo git pull origin main'
+#       - name: Pulling from the main 
+#         run: ssh ec2 'sudo docker-compose -f docker-compose.yml up -d --build'   
 
-        #   git checkout master &&
-        #   git fetch --all &&
-        #   git reset --hard origin/master &&
-        #    &&
-        #   docker-compose -f docker-compose.yml up -d --build
+#         #   git checkout master &&
+#         #   git fetch --all &&
+#         #   git reset --hard origin/master &&
+#         #    &&
+#         #   docker-compose -f docker-compose.yml up -d --build
         
