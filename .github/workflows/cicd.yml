@@ -1,48 +1,48 @@
-name: CI/CD pipeline
+# name: CI/CD pipeline
 
-on:
-  push:
-    branches: [ developer ]
+# on:
+#   push:
+#     branches: [ developer ]
 
-jobs:
-#First we will see the application build or not , then we will deploy in EC2
-#   build:
+# jobs:
+# #First we will see the application build or not , then we will deploy in EC2
+# #   build:
+# #     runs-on: ubuntu-latest
+    
+# #     steps:
+# #     - uses: actions/checkout@v3
+    
+# #     - name: Build the docker_compose
+# #       run: docker-compose up -d --build
+      
+#     # - name: Buid the application
+#     #   run: docker-compose exec -T counter_app npm run build
+
+#   Deploy:
+# #    needs: build
 #     runs-on: ubuntu-latest
     
 #     steps:
-#     - uses: actions/checkout@v3
-    
-#     - name: Build the docker_compose
-#       run: docker-compose up -d --build
-      
-    # - name: Buid the application
-    #   run: docker-compose exec -T counter_app npm run build
-
-  Deploy:
-#    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3 
-      - name: Deploy in EC2
-        env:
-            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-            HOSTNAME : ${{ secrets.HOSTNAME  }}
-            USER_NAME : ${{ secrets.USER_NAME  }}
+#       - uses: actions/checkout@v3 
+#       - name: Deploy in EC2
+#         env:
+#             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+#             HOSTNAME : ${{ secrets.HOSTNAME  }}
+#             USER_NAME : ${{ secrets.USER_NAME  }}
             
-        run: |
-          echo "$PRIVATE_KEY" > private_key.pem && chmod 400 private_key.pem
-          cat private_key.pem
-          #ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-          # ssh -o StrictHostKeyChecking=no -i private_key 13-126-152-69@13-126-152-69 
-          ssh -tt private_key.pem ec2-user@ec2-13-126-152-69.ap-south-1.compute.amazonaws.com
+#         run: |
+#           echo "$PRIVATE_KEY" > private_key.pem && chmod 400 private_key.pem
+#           cat private_key.pem
+#           #ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+#           # ssh -o StrictHostKeyChecking=no -i private_key 13-126-152-69@13-126-152-69 
+#           ssh -tt private_key.pem ec2-user@ec2-13-126-152-69.ap-south-1.compute.amazonaws.com
           
-            #Now we have got the access of EC2 and we will start the deploy .
+#             #Now we have got the access of EC2 and we will start the deploy .
 
-            cd /home/ubuntu/pipelinedemo &&
-            git checkout master &&
-            git fetch --all &&
-            git reset --hard origin/master &&
-            git pull origin master &&
+#             cd /home/ubuntu/pipelinedemo &&
+#             git checkout master &&
+#             git fetch --all &&
+#             git reset --hard origin/master &&
+#             git pull origin master &&
 
-            docker-compose -f docker-compose.yml up -d --build 
+#             docker-compose -f docker-compose.yml up -d --build 
