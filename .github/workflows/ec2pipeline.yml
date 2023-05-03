@@ -14,5 +14,12 @@ jobs:
         uses: actions/checkout@v3
       - name: build docker image
         run : sudo docker-compose -f docker-compose.yml up -d --build
+      - name: Slack Notification
+        uses: act10ns/slack@v1
+        with: 
+          status: ${{ job.status }}
+          channel: '#testing'
+          message: Build {{ env.GITHUB_REF_NAME }} branch Successfully
+        if: always()
 
   
