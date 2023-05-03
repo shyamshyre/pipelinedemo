@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: ./Dockerfile
     command: npm run start:dev api-service
-    env_file:
-      - ./.env
-    volumes:
-      - .:/usr/src/app
+    # env_file:
+    #   - ./.env
+    # volumes:
+      # - .:/usr/src/app
       # - /usr/src/app/node_modules
     ports:
       - 9001:9001
